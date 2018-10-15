@@ -7,3 +7,4 @@
 Log4j 2使用教程：https://www.cnblogs.com/leo-lsw/p/log4j2tutorial.html
 Log4j2介绍和特性实例(四)--过滤器Filter ：https://blog.csdn.net/chenhaotong/article/details/50487557
 log4j2 AsyncAppender参考:http://logging.apache.org/log4j/2.x/manual/appenders.html
+Log4j配置文件详解：http://weigang-gao.iteye.com/admin/blogs/2149663
