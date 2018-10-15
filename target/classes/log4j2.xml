@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- status="debug" 可以查看log4j的装配过程-->
 <!-- status="OFF"，可以去掉，它的含义为是否记录log4j2本身的event信息，默认是OFF -->
-<Configuration status="debug" xmlns:log4j='http://jakarta.apache.org/log4j/2.x/'>
+<Configuration status="debug">
 
     <!--定义属性-->
     <Properties>
@@ -75,6 +75,9 @@
                 <pattern>%d{yyyy-MM-dd HH:mm:ss} [%c %M %L]-[%p] %m%n</pattern>
             </PatternLayout>
             <Policies>
+                <!--每天一个日志文件，也可以基于大小配置
+                    <SizeBasedTriggeringPolicy size="50MB"/>
+                 -->
                 <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
             </Policies>
             <Filters>
@@ -98,6 +101,11 @@
             <DefaultRolloverStrategy max="7"/>
         </RollingFile>
 
+        <!--异步Appender-->
+        <Async name="Async_TEST_ERROR">
+            <AppenderRef ref="TEST_ERROR"/>
+        </Async>
+
     </Appenders>
     <Loggers>
         <!-- name指定该配置适用于那些目录，level指定日志级别一起以上的日志才适用， addditivity是否可以传递性,这样Root日志记录器就不会再记录一遍了-->
@@ -117,13 +125,10 @@
             <AppenderRef ref="TEST_INFO"/>
             <AppenderRef ref="TEST_DEBUG"/>
             <AppenderRef ref="TEST_WARN"/>
-            <AppenderRef ref="TEST_ERROR"/>
+            <AppenderRef ref="Async_TEST_ERROR"/>
         </AsyncLogger>
          <Root level="INFO" additivity="false">
-        	<AppenderRef ref="Console"/>
-            <AppenderRef ref="TEST_INFO"/>
-            <AppenderRef ref="TEST_ERROR"/>
-            <AppenderRef ref="TEST_WARN"/>
+        	 <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
 </Configuration>
